@@ -9,8 +9,8 @@
 using namespace TexturalAnalysis;
 
 PointArray RS::calculatePoints(const Image& image, const int x1, const int y1, const int x2, const int y2) {
-    const int deltaX = std::abs(x2 - x1);
-    const int deltaY = std::abs(y2 - y1);
+  const int deltaX = std::abs(x2 - x1);
+  const int deltaY = std::abs(y2 - y1);
 
     const int signX = x1 < x2 ? 1 : -1;
     const int signY = y1 < y2 ? 1 : -1;
