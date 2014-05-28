@@ -1,14 +1,10 @@
 #include "Bresenham.h"
 
+#include <cmath>
+
 using namespace TexturalAnalysis;
 
-std::vector<double> Bresenham::determinePoints(
-  const Image& image, 
-  const int x1,
-  const int y1,
-  const int x2, 
-  const int y2)
-{
+std::vector<double> Bresenham::determinePoints(const Image& image, const int x1, const int y1, const int x2, const int y2) {
     const int deltaX = std::abs(x2 - x1);
     const int deltaY = std::abs(y2 - y1);
 
