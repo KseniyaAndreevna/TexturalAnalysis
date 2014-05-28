@@ -10,12 +10,12 @@
 
 using namespace TexturalAnalysis;
 
-std::vector<std::vector<Point>> Fractal::calculatePointsSerias(const Image& image, const int x1, const int y1, const int x2, const int y2) {
+std::vector< std::vector<Point> > Fractal::calculatePointsSerias(const Image& image, const int x1, const int y1, const int x2, const int y2) {
     std::vector<double> intensivities = Bresenham::determinePoints(image, x1, y1, x2, y2);
 
     int intensivitiesCount = intensivities.size();
 
-    std::vector<std::vector<Point>> pointsSerias;
+    std::vector< std::vector<Point> > pointsSerias;
 
     int pointsSeriasIndex = 0;
 
@@ -60,7 +60,7 @@ std::vector<std::vector<Point>> Fractal::calculatePointsSerias(const Image& imag
     return pointsSerias;
 }
 
-double Fractal::distanse(const std::vector<std::vector<double>>& phasePoints, const int i, const int j, const int dimension) {
+double Fractal::distanse(const std::vector< std::vector<double> >& phasePoints, const int i, const int j, const int dimension) {
     double sum = 0;
 
     for (int k = 0; k < dimension; k++) {
@@ -78,7 +78,7 @@ int Fractal::L(const int demension) {
     return demension;
 }
 
-double Fractal::C(const std::vector<std::vector<double>>& phasePoints, const int r, const int initialPointsCount, const int dimension) {
+double Fractal::C(const std::vector< std::vector<double> >& phasePoints, const int r, const int initialPointsCount, const int dimension) {
     int number = N(initialPointsCount, dimension);
 
     int innerPointsCount = 0;
@@ -92,6 +92,6 @@ double Fractal::C(const std::vector<std::vector<double>>& phasePoints, const int
     return totalValue > 0 ? totalValue : 0.01;
 }
 
-int Fractal::heaviside(const std::vector<std::vector<double>>& phasePoints, const int r, const int i, const int j, const int dimension) {
+int Fractal::heaviside(const std::vector< std::vector<double> >& phasePoints, const int r, const int i, const int j, const int dimension) {
     return r - distanse(phasePoints, i, j, dimension) > 0 ? 1 : 0;
 }
