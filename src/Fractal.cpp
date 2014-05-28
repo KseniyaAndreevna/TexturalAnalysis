@@ -26,7 +26,7 @@ std::vector< std::vector<Point> > Fractal::calculatePointsSerias(const Image& im
 
         int phasePointsCount = N(intensivitiesCount, dimension);
 
-        std::vector<std::vector<double>> phasePoints(phasePointsCount);
+        std::vector< std::vector<double> > phasePoints(phasePointsCount);
 
         int length = L(dimension);
 
