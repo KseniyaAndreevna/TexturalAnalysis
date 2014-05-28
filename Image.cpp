@@ -6,6 +6,16 @@ Image::Image(const int size) {
     init(size, size);
 }
 
+Image::Image(const Image& image) {
+    init(image.height(), image.width());
+
+    for (int i = 0; i < imageHeight; i++) {
+        for (int j = 0; j < imageWidth; j++) {
+            set(i, j, image.get(i, j));
+        }
+    }
+}
+
 Image::Image(const int height, const int width) {
     init(height, width);
 }
@@ -16,6 +26,26 @@ Image::~Image() {
     }
 
     delete[] imageMatrix;
+}
+
+Image& Image::operator=(const Image& image) {
+    if (this != &image) {
+        for (int i = 0; i < imageHeight; i++) {
+            delete[] imageMatrix[i];
+        }
+
+        delete[] imageMatrix;
+
+        init(image.height(), image.width());
+
+        for (int i = 0; i < imageHeight; i++) {
+            for (int j = 0; j < imageWidth; j++) {
+                set(i, j, image.get(i, j));
+            }
+        }
+    }
+
+    return *this;
 }
 
 int Image::height() const {

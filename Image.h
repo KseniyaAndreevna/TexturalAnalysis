@@ -14,6 +14,12 @@ namespace TexturalAnalysis {
         Image(const int size);
 
         /*!
+          Создается матрица, задающая изображение на основе указанной матрицы.
+          \param image матрица
+        */
+        Image(const Image& image);
+
+        /*!
           Создается матрица, задающая изображения указанных размеров высоты и ширины. Заполнена нулями.
           \param height высота матрицы
           \param width ширина матрицы
@@ -24,6 +30,13 @@ namespace TexturalAnalysis {
           Удаляет созданную матрицу.
         */
         ~Image();
+
+        /*!
+          Присваивает содержимое указанной матрицы.
+          \param image матрица
+          \return ссылку на текущий объект
+        */
+        Image& operator=(const Image& image);
 
         /*!
           Возвращает высоту матрицы.
