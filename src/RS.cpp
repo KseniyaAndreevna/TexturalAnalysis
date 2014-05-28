@@ -2,26 +2,26 @@
 
 #include <cmath>
 
-#include "DoubleArray.h"
+#include <vector>
 
 #include "Math.h"
 
 using namespace TexturalAnalysis;
 
 PointArray RS::calculatePoints(const Image& image, const int x1, const int y1, const int x2, const int y2) {
-  const int deltaX = std::abs(x2 - x1);
-  const int deltaY = std::abs(y2 - y1);
+    const int deltaX = std::abs(x2 - x1);
+    const int deltaY = std::abs(y2 - y1);
 
     const int signX = x1 < x2 ? 1 : -1;
     const int signY = y1 < y2 ? 1 : -1;
 
     const int N = deltaX > deltaY ? deltaX + 1 : deltaY + 1;
 
-    DoubleArray h(N);
+    std::vector<double> h(N);
 
     int count = 0;
 
-    h.set(count, image.get(y2, x2));
+    h[count] = image.get(y2, x2);
 
     int error = deltaX - deltaY;
 
@@ -31,7 +31,7 @@ PointArray RS::calculatePoints(const Image& image, const int x1, const int y1, c
     while ((currentX != x2) || (currentY != y2)) {
         count++;
 
-        h.set(count, image.get(currentY, currentX));
+        h[count] = image.get(currentY, currentX);
 
         int error2 = error * 2;
 
@@ -48,23 +48,23 @@ PointArray RS::calculatePoints(const Image& image, const int x1, const int y1, c
         }
     }
 
-    DoubleArray H(h.size());
+    std::vector<double> H(h.size());
 
-    H.set(0, h.get(0));
+    H[0] = h[0];
 
     for (int i = 1; i < h.size(); i++) {
-        H.set(i, H.get(i - 1) + h.get(i));
+        H[i] = H[i - 1] + h[i];
     }
 
-    DoubleArray averageH(H.size());
+    std::vector<double> averageH(H.size());
 
     for (int i = 0; i < H.size(); i++) {
-        averageH.set(i, H.get(i) / (i + 1));
+        averageH[i] = H[i] / (i + 1);
     }
 
-    DoubleArray r(h.size());
+    std::vector<double> r(h.size());
 
-    r.set(0, 0);
+    r[0] = 0;
 
     for (int n = 1; n < h.size(); n++) {
         for (int k = 0; k < n; k++) {
@@ -74,7 +74,7 @@ PointArray RS::calculatePoints(const Image& image, const int x1, const int y1, c
             double Min = 0;
 
             for (int i = 0; i <= k; i++) {
-                sum += h.get(i) - averageH.get(n);
+                sum += h[i] - averageH[n];
 
                 if (sum < Min) { Min = sum; }
 
@@ -82,35 +82,35 @@ PointArray RS::calculatePoints(const Image& image, const int x1, const int y1, c
 
             }
 
-            r.set(n, Max - Min);
+            r[n] = Max - Min;
         }
     }
 
-    DoubleArray s(h.size());
+    std::vector<double> s(h.size());
 
     for (int n = 0; n < h.size(); n++) {
         double sum = 0;
 
         for (int i = 0; i < n; i++){
-            sum += pow((h.get(i) - averageH.get(n)), 2.0);
+            sum += pow(h[i] - averageH[n], 2.0);
         }
 
-        s.set(n, sqrt(sum / (n + 1)));
+        s[n] = sqrt(sum / (n + 1));
     }
 
-    DoubleArray rs(h.size());
+    std::vector<double> rs(h.size());
 
-    rs.set(0, 0);
+    rs[0] = 0;
 
     for (int i = 1; i < r.size(); i++) {
-        rs.set(i, r.get(i) / s.get(i));
+        rs[i] = r[i] / s[i];
     }
 
     PointArray points(rs.size());
 
     for (int i = 1; i < rs.size(); i++) {
         double pointX = Math::ln(i);
-        double pointY = Math::ln(rs.get(i));
+        double pointY = Math::ln(rs[i]);
 
         points.set(i, Point(pointX, pointY));
     }
