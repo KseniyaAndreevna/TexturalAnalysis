@@ -8,8 +8,20 @@
 #include "PointArray.h"
 
 namespace TexturalAnalysis {
+    /*!
+      Класс содержит функционал, связанный с фрактальным анализом.
+    */
     class Fractal {
     public:
+        /*!
+          Вычисляет серии точек с помощью алгоритма фрактального анализа.
+          \param image соответствует переданному изображению
+          \param x1 координата x точки (x1, y1)
+          \param y1 координата y точки (x1, y1)
+          \param x2 координата x точки (x2, y2)
+          \param y2 координата y точки (x2, y2)
+          \return вычисленные серии точек
+        */
         static std::vector<std::vector<Point>> calculatePointsSerias(const Image& image, const int x1, const int y1, const int x2, const int y2);
 
     private:
