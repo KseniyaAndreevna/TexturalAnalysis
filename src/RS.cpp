@@ -8,7 +8,7 @@
 
 using namespace TexturalAnalysis;
 
-PointArray RS::calculatePoints(const Image& image, const int x1, const int y1, const int x2, const int y2) {
+std::vector<Point> RS::calculatePoints(const Image& image, const int x1, const int y1, const int x2, const int y2) {
     const int deltaX = std::abs(x2 - x1);
     const int deltaY = std::abs(y2 - y1);
 
@@ -106,26 +106,26 @@ PointArray RS::calculatePoints(const Image& image, const int x1, const int y1, c
         rs[i] = r[i] / s[i];
     }
 
-    PointArray points(rs.size());
+    std::vector<Point> points(rs.size());
 
     for (int i = 1; i < rs.size(); i++) {
         double pointX = Math::ln(i);
         double pointY = Math::ln(rs[i]);
 
-        points.set(i, Point(pointX, pointY));
+        points[i] = Point(pointX, pointY);
     }
 
     return points;
 }
 
-HirstValues RS::calculateHirstValues(const PointArray& rsPoints) {
+HirstValues RS::calculateHirstValues(const std::vector<Point>& rsPoints) {
     double c1 = 0;
     double c2 = 0;
     double g1 = 0;
     double g2 = 0;
 
     for (int i = 0; i < rsPoints.size(); i++) {
-        Point point = rsPoints.get(i);
+        Point point = rsPoints[i];
 
         c1 += pow(point.x(), 2.0);
         c2 += point.x();
