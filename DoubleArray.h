@@ -14,9 +14,22 @@ namespace TexturalAnalysis {
         DoubleArray(const int size);
 
         /*!
-          Удаляет созданный массив.        
+          Создается массив на основе указанного массива.
+          \param doubleArray массив
+        */
+        DoubleArray(const DoubleArray& doubleArray);
+
+        /*!
+          Удаляет созданный массив.
         */
         ~DoubleArray();
+
+        /*!
+          Присваивает содержимое указанного массива.
+          \param doubleArray массив
+          \return ссылку на текущий объект
+        */
+        DoubleArray& operator=(const DoubleArray& doubleArray);
 
         /*!
           Возвращает размер массива.
@@ -25,14 +38,14 @@ namespace TexturalAnalysis {
         int size() const;
 
         /*!
-         Возвращает значение массива по указанному индексу. 
+         Возвращает значение массива по указанному индексу.
          \param index индекс в массиве
          \return значение по индексу.
         */
-        double get(const int index);
+        double get(const int index) const;
 
         /*!
-          Устанавливает указанное значение по указанному индексу. 
+          Устанавливает указанное значение по указанному индексу.
           \param index индекс в массиве
           \param value значение
         */
