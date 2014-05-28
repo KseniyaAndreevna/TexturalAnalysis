@@ -16,9 +16,22 @@ namespace TexturalAnalysis {
         PointArray(const int size);
 
         /*!
+          Создается массив на основе указанного массива.
+          \param pointArray массив
+        */
+        PointArray(const PointArray& pointArray);
+
+        /*!
           Удаляет созданный массив.
         */
         ~PointArray();
+
+        /*!
+          Присваивает содержимое указанного массива.
+          \param pointArray массив
+          \return ссылку на текущий объект
+        */
+        PointArray& operator=(const PointArray& pointArray);
 
         /*!
           Возвращает размер массива.
